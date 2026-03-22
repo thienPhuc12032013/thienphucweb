@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System Access - Harker</title>
+<style>
+/* ==== RESET & FONT ==== */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Consolas', 'Courier New', monospace; }
+
+/* ==== BODY & BACKGROUND ==== */
+body {
+    background-color: #0b0f14;
+    /* Bạn có thể thay url() bên dưới bằng link ảnh nền khác nếu muốn */
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), /* Lớp phủ tối màu */
+        url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1600'); /* Ảnh nền Code Matrix */
+    background-size: cover;
+    background-position: center;
+    color: #00ff9c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ==== LOGIN CONTAINER ==== */
+.auth-container {
+    background: rgba(15, 20, 26, 0.95); /* Nền bán trong suốt để thấy ảnh nền mờ ảo */
+    padding: 40px 40px;
+    border: 1px solid #00ff9c;
+    box-shadow: 0 0 30px rgba(0, 255, 156, 0.2);
+    width: 400px;
+    text-align: center;
+    position: relative;
+    backdrop-filter: blur(5px); /* Làm mờ hậu cảnh sau khung login */
+}
+
+/* Hiệu ứng 4 góc vuông trang trí */
+.auth-container::before, .auth-container::after {
+    content: '';
+    position: absolute;
+    width: 15px; height: 15px;
+    border: 3px solid #00ff9c;
+    transition: 0.3s;
+}
+.auth-container::before { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+.auth-container::after { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+
+/* ==== LOGO ICON (PHẦN MỚI THÊM) ==== */
+.login-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 15px;
+    /* Hiệu ứng biến ảnh đen trắng thành màu xanh neon */
+    filter: drop-shadow(0 0 10px #00ff9c) hue-rotate(90deg) brightness(1.2);
+    object-fit: contain;
+}
+
+/* TITLE */
+.auth-container h2 {
+    margin-bottom: 5px;
+    font-size: 26px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(0, 255, 156, 0.8);
+}
+
+.sub-text {
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 25px;
+    display: block;
+    letter-spacing: 1px;
+}
+
+/* INPUT GROUPS */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    font-size: 12px;
+    color: #00ff9c;
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.auth-container input {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 0; 
+    border: 1px solid #333;
+    background: rgba(5, 7, 9, 0.8);
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.auth-container input:focus {
+    border-color: #00ff9c;
+    box-shadow: 0 0 15px rgba(0, 255, 156, 0.2) inset; /* Bóng đổ vào trong */
+}
+
+/* BUTTON */
+.auth-container button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    border: 1px solid #00ff9c;
+    background: rgba(0, 255, 156, 0.1);
+    color: #00ff9c;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.auth-container button:hover {
+    background: #00ff9c;
+    color: #000;
+    box-shadow: 0 0 25px #00ff9c;
+}
+
+.auth-container button:disabled {
+    background: #333;
+    border-color: #555;
+    color: #888;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* LINKS */
+.auth-container p {
+    margin-top: 20px;
+    font-size: 13px;
+    color: #666;
+}
+.auth-container a {
+    color: #00ff9c;
+    text-decoration: none;
+    font-weight: bold;
+}
+.auth-container a:hover {
+    text-decoration: underline;
+    text-shadow: 0 0 5px #00ff9c;
+}
+
+/* ERROR MESSAGE */
+#errorMsg {
+    color: #ff5555;
+    margin-top: 15px;
+    font-size: 13px;
+    min-height: 20px; 
+    text-shadow: 0 0 5px rgba(255, 85, 85, 0.5);
+}
+
+</style>
+</head>
+<body>
+
+<div class="auth-container">
+    <!-- PHẦN HÌNH ẢNH MỚI THÊM -->
+    <!-- Dùng link icon khiên bảo mật hoặc logo shop của bạn -->
+    <img src="https://cdn-icons-png.flaticon.com/512/2452/2452586.png" alt="Security Logo" class="login-icon">
+
+    <h2>SYSTEM ACCESS</h2>
+    <span class="sub-text">// SECURITY LEVEL: HIGH</span>
+
+    <form id="loginForm">
+        <div class="input-group">
+            <label for="username">USERNAME_</label>
+            <input type="text" id="username" placeholder="Nhập ID (admin)" required autocomplete="off">
+        </div>
+        
+        <div class="input-group">
+            <label for="password">PASSWORD_</label>
+            <input type="password" id="password" placeholder="Nhập Mật khẩu (123456)" required>
+        </div>
+
+        <button type="submit" id="loginBtn">[ LOGIN ]</button>
+    </form>
+    
+    <p id="errorMsg"></p>
+
+    <p>New User? <a href="register.html">Create Identity</a></p>
+</div>
+
+<script>
+// Tài khoản mẫu
+const VALID_USER = { username: "admin", password: "123456" };
+
+const loginForm = document.getElementById('loginForm');
+const errorMsg = document.getElementById('errorMsg');
+const loginBtn = document.getElementById('loginBtn');
+
+loginForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    
+    // Reset lỗi cũ
+    errorMsg.textContent = "";
+    
+    // Lấy giá trị
+    const usernameInput = document.getElementById('username').value;
+    const passwordInput = document.getElementById('password').value;
+
+    // Hiệu ứng "Đang xử lý..."
+    loginBtn.textContent = "DECRYPTING...";
+    loginBtn.disabled = true;
+    document.body.style.cursor = "wait";
+
+    // Giả lập độ trễ mạng (1.5 giây)
+    setTimeout(() => {
+        if(usernameInput === VALID_USER.username && passwordInput === VALID_USER.password){
+            // Đăng nhập thành công
+            errorMsg.style.color = "#00ff9c";
+            errorMsg.textContent = "> ACCESS GRANTED. REDIRECTING...";
+            
+            // Lưu trạng thái
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('currentUser', usernameInput);
+
+            // Chuyển trang
+            setTimeout(() => {
+                window.location.href = "main.html";
+            }, 1000);
+            
+        } else {
+            // Đăng nhập thất bại
+            errorMsg.style.color = "#ff5555";
+            errorMsg.textContent = "> ERROR: INVALID CREDENTIALS.";
+            
+            // Reset nút bấm
+            loginBtn.textContent = "[ LOGIN ]";
+            loginBtn.disabled = false;
+            document.body.style.cursor = "default";
+            
+            // Rung lắc form
+            const container = document.querySelector('.auth-container');
+            container.style.transform = "translateX(5px)";
+            setTimeout(() => container.style.transform = "translateX(0)", 100);
+        }
+    }, 1500);
+});
+</script>
+
+</body>
+</html>

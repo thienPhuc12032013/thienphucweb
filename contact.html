@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harker Shop - Liên Hệ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>KÊNH LIÊN LẠC</h1>
+        <p style="font-size: 0.9rem; color: #666;">// SECURE TRANSMISSION CHANNEL</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="main.html">Trang Chủ</a></li>
+            <li><a href="about.html">Giới Thiệu</a></li>
+            <li><a href="product.html">Sản Phẩm</a></li>
+            <li><a href="contact.html" class="active">Liên Hệ</a></li>
+            <li><a href="login.html">Đăng Xuất</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <h2 class="section-title">// GỬI TIN NHẮN MÃ HÓA</h2>
+        
+        <div class="contact-container">
+            <!-- Cột 1: Thông tin -->
+            <div class="contact-info">
+                <h3>THÔNG TIN HỆ THỐNG</h3>
+                <p>Mọi liên lạc qua kênh này đều được mã hóa đầu cuối. Vui lòng không gửi thông tin nhạy cảm qua mạng công cộng.</p>
+                
+                <ul class="info-list">
+                    <li>
+                        <strong>[ HQ LOCATION ]</strong><br>
+                        127.0.0.1 (Localhost) - Server Room 404
+                    </li>
+                    <li>
+                        <strong>[ EMAIL ]</strong><br>
+                        admin@harker.system
+                    </li>
+                    <li>
+                        <strong>[ HOTLINE ]</strong><br>
+                        +84 999 ERROR 500
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Cột 2: Form -->
+            <div class="contact-form-box">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label>CODENAME (TÊN):</label>
+                        <input type="text" id="name" required placeholder="Nhập biệt danh...">
+                    </div>
+
+                    <div class="form-group">
+                        <label>EMAIL:</label>
+                        <input type="email" id="email" required placeholder="email@domain.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label>MESSAGE (NỘI DUNG):</label>
+                        <textarea id="message" rows="5" required placeholder="Nhập yêu cầu..."></textarea>
+                    </div>
+
+                    <button type="submit" id="sendBtn">[ GỬI DỮ LIỆU ]</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2025 Harker Shop. <span style="color: #444;">Connection Stable.</span>
+    </footer>
+
+    <!-- Script xử lý gửi form giả lập -->
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('sendBtn');
+            const originalText = btn.textContent;
+            
+            // Hiệu ứng gửi
+            btn.textContent = "ENCRYPTING & SENDING...";
+            btn.disabled = true;
+            btn.style.backgroundColor = "#333";
+            btn.style.color = "#888";
+
+            // Giả lập delay 2 giây
+            setTimeout(() => {
+                alert(">> SYSTEM MESSAGE:\nDữ liệu đã được gửi thành công đến máy chủ!");
+                
+                // Reset form
+                document.getElementById('contactForm').reset();
+                
+                // Trả lại nút bấm
+                btn.textContent = originalText;
+                btn.disabled = false;
+                btn.style.backgroundColor = "transparent";
+                btn.style.color = "#00ff9c";
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

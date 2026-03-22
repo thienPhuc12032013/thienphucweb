@@ -1,0 +1,431 @@
+/* ==== RESET CƠ BẢN ==== */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Consolas', 'Courier New', monospace;
+}
+
+/* ==== CẤU TRÚC CHUNG ==== */
+body {
+    background-color: #0b0f14;
+    color: #00ff9c;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==== HEADER ==== */
+header {
+    background-color: #050709;
+    color: #00ff9c;
+    text-align: center;
+    padding: 20px;
+    border-bottom: 2px solid #00ff9c;
+    text-shadow: 0 0 10px rgba(0, 255, 156, 0.5);
+    letter-spacing: 2px;
+}
+
+/* ==== NAVIGATION ==== */
+nav {
+    background-color: #000;
+    border-bottom: 1px solid #00ff9c;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+nav ul li a {
+    color: #00ff9c;
+    text-decoration: none;
+    padding: 15px 25px;
+    display: block;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+nav ul li a:hover, nav ul li a.active {
+    background-color: #00ff9c;
+    color: #000;
+    box-shadow: 0 0 15px #00ff9c;
+}
+
+/* ==== HERO SECTION (TRANG CHỦ) ==== */
+.hero-section {
+    background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                url('https://placehold.co/1920x600/111/222?text=CYBER+BACKGROUND');
+    background-size: cover;
+    background-position: center;
+    padding: 80px 20px;
+    text-align: center;
+    border-bottom: 1px dashed #00ff9c;
+}
+
+.hero-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    min-height: 1.2em; /* Giữ chỗ cho hiệu ứng gõ chữ */
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    color: #ccc;
+    margin-bottom: 10px;
+}
+
+.btn-large {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 15px 40px;
+    background-color: #00ff9c;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    border: 2px solid #00ff9c;
+    transition: 0.3s;
+}
+
+.btn-large:hover {
+    background-color: transparent;
+    color: #00ff9c;
+    box-shadow: 0 0 20px #00ff9c;
+}
+
+/* ==== MAIN CONTAINER ==== */
+main {
+    flex: 1;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.section-title {
+    margin: 40px 0 20px 0;
+    border-left: 4px solid #00ff9c;
+    padding-left: 15px;
+    font-size: 1.5rem;
+}
+
+/* ==== FEATURES GRID (DỊCH VỤ) ==== */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.feature-box {
+    background: #0f141a;
+    padding: 30px;
+    border: 1px solid #333;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.feature-box:hover {
+    border-color: #00ff9c;
+    transform: translateY(-5px);
+}
+
+.feature-box h3 {
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+/* ==== PRODUCT STYLES (DÙNG CHUNG CHO CẢ 2 TRANG) ==== */
+.control-panel {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.control-panel input, .control-panel select {
+    padding: 10px 15px;
+    background: #0f141a;
+    border: 1px solid #00ff9c;
+    color: #00ff9c;
+    outline: none;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+.product-item {
+    background: #0f141a;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.product-item:hover {
+    border-color: #00ff9c;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 255, 156, 0.2);
+}
+
+.img-box {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-bottom: 1px solid #333;
+}
+
+.img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-item:hover .img-box img {
+    transform: scale(1.1);
+}
+
+.info-box {
+    padding: 15px;
+    text-align: center;
+}
+
+.info-box h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.info-box .price {
+    font-size: 1.3rem;
+    color: #00ff9c;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+button {
+    background-color: transparent;
+    color: #00ff9c;
+    border: 1px solid #00ff9c;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+button:hover {
+    background-color: #00ff9c;
+    color: #000;
+    box-shadow: 0 0 15px #00ff9c;
+}
+
+/* ==== FOOTER ==== */
+footer {
+    background-color: #050709;
+    color: #555;
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid #222;
+    margin-top: auto;
+}
+
+/* ==== RESPONSIVE ==== */
+@media (max-width: 768px) {
+    nav ul { flex-direction: column; }
+    nav ul li a { border-bottom: 1px solid #111; }
+    .hero-content h2 { font-size: 1.8rem; }
+    .product-grid { grid-template-columns: 1fr; }
+}
+/* ==== CSS RIÊNG CHO TRANG ABOUT ==== */
+
+/* Khung nội dung câu chuyện */
+.story-box {
+    background: #0f141a;
+    padding: 30px;
+    border-left: 2px solid #00ff9c;
+    border-right: 2px solid #00ff9c;
+    color: #ccc;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.story-box .highlight {
+    color: #00ff9c;
+    font-weight: bold;
+}
+
+.mission-list {
+    list-style: none;
+    margin-top: 20px;
+    padding-left: 20px;
+}
+
+.mission-list li {
+    margin-bottom: 10px;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Lưới đội ngũ (Team Grid) */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.team-card {
+    background: #0f141a;
+    border: 1px solid #333;
+    padding: 30px 20px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.team-card:hover {
+    border-color: #00ff9c;
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(0, 255, 156, 0.2);
+}
+
+.team-card img {
+    border-radius: 50%; /* Ảnh tròn */
+    border: 2px solid #00ff9c;
+    margin-bottom: 20px;
+    padding: 5px;
+    background: #000;
+}
+
+.team-card h3 {
+    color: #00ff9c;
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+}
+
+.team-card .role {
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px dashed #555;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.team-card .desc {
+    color: #888;
+    font-size: 0.9rem;
+}
+/* ==== CSS RIÊNG CHO TRANG CONTACT ==== */
+
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr; /* Cột form rộng hơn cột tin tức */
+    gap: 40px;
+    margin-top: 20px;
+}
+
+/* Phần thông tin bên trái */
+.contact-info {
+    background: #0f141a;
+    padding: 30px;
+    border: 1px solid #333;
+    height: fit-content;
+}
+
+.contact-info h3 {
+    color: #fff;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #00ff9c;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.info-list {
+    list-style: none;
+    margin-top: 30px;
+    padding: 0;
+}
+
+.info-list li {
+    margin-bottom: 25px;
+    border-left: 2px solid #00ff9c;
+    padding-left: 15px;
+}
+
+.info-list strong {
+    color: #00ff9c;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Phần Form bên phải */
+.contact-form-box {
+    background: #0f141a;
+    padding: 30px;
+    border: 1px solid #00ff9c; /* Viền sáng hơn để nhấn mạnh */
+    box-shadow: 0 0 15px rgba(0, 255, 156, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    color: #00ff9c;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    background: #050709;
+    border: 1px solid #333;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus {
+    border-color: #00ff9c;
+    box-shadow: 0 0 10px rgba(0, 255, 156, 0.2);
+}
+
+/* Responsive cho mobile */
+@media (max-width: 768px) {
+    .contact-container {
+        grid-template-columns: 1fr; /* Chuyển thành 1 cột */
+    }
+}

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harker Shop - Giới Thiệu</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* CSS RIÊNG CHO TRANG ABOUT ĐỂ XỬ LÝ ẢNH ĐẸP HƠN */
+        
+        /* Bố cục phần Story: Chia đôi (Ảnh - Chữ) */
+        .story-layout {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap; /* Tự xuống dòng trên điện thoại */
+        }
+        
+        .story-text {
+            flex: 1; /* Chiếm phần còn lại */
+        }
+
+        .story-image-box {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .story-image-box img {
+            width: 100%;
+            border: 2px solid #00ff9c;
+            /* Hiệu ứng ảnh cũ kiểu camera an ninh */
+            filter: grayscale(80%) contrast(1.2) brightness(0.8); 
+            box-shadow: 10px 10px 0px rgba(0, 255, 156, 0.2);
+            transition: 0.5s;
+        }
+
+        .story-image-box img:hover {
+            filter: grayscale(0%) contrast(1) brightness(1);
+            box-shadow: 0 0 20px #00ff9c;
+        }
+
+        /* Chỉnh sửa ảnh phần Team (Avatar tròn) */
+        .team-card img {
+            width: 140px;
+            height: 140px;
+            object-fit: cover; /* Cắt ảnh vừa khung tròn */
+            border-radius: 50%;
+            border: 3px solid #333;
+            box-shadow: 0 0 15px rgba(0, 255, 156, 0.3);
+            transition: 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .team-card:hover img {
+            border-color: #00ff9c;
+            transform: scale(1.1) rotate(5deg); /* Xoay nhẹ khi di chuột */
+            box-shadow: 0 0 25px #00ff9c;
+        }
+
+        /* Responsive cho điện thoại */
+        @media (max-width: 768px) {
+            .story-layout {
+                flex-direction: column-reverse; /* Đưa ảnh lên trên chữ khi ở màn hình nhỏ */
+            }
+            .story-image-box {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>DỮ LIỆU HỆ THỐNG</h1>
+        <p style="font-size: 0.9rem; color: #666;">// CLASSIFIED INFORMATION</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="main.html">Trang Chủ</a></li>
+            <li><a href="about.html" class="active">Giới Thiệu</a></li>
+            <li><a href="product.html">Sản Phẩm</a></li>
+            <li><a href="contact.html">Liên Hệ</a></li>
+            <li><a href="login.html">Đăng Xuất</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- PHẦN 1: CÂU CHUYỆN (Đã thêm ảnh minh họa) -->
+        <section class="about-section">
+            <h2 class="section-title">// NGUỒN GỐC (ORIGIN)</h2>
+            
+            <div class="story-box story-layout">
+                <!-- Cột Chữ -->
+                <div class="story-text">
+                    <p>
+                        <span class="highlight">> KHỞI CHẠY NĂM 2025:</span> Harker Shop không chỉ là một cửa hàng. Đây là một trung tâm cung cấp giải pháp công nghệ cao cho những người đam mê sự hoàn hảo và bảo mật tuyệt đối.
+                    </p>
+                    <br>
+                    <p>
+                        Chúng tôi tin rằng công nghệ không nên bị giới hạn. Sứ mệnh của chúng tôi là cung cấp phần cứng mạnh mẽ nhất và phần mềm an toàn nhất, giúp bạn vượt qua mọi rào cản kỹ thuật số.
+                    </p>
+                    <br>
+                    <ul class="mission-list">
+                        <li>[+] BẢO MẬT TUYỆT ĐỐI</li>
+                        <li>[+] PHẦN CỨNG CAO CẤP</li>
+                        <li>[+] HỖ TRỢ 24/7/365</li>
+                    </ul>
+                </div>
+
+                <!-- Cột Ảnh (MỚI THÊM) -->
+                <div class="story-image-box">
+                    <!-- Ảnh phòng server/hacker -->
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800" alt="Cyberpunk Lab">
+                </div>
+            </div>
+        </section>
+
+        <!-- PHẦN 2: ĐỘI NGŨ (Đã thay ảnh thật) -->
+        <section class="team-section">
+            <h2 class="section-title">// ĐỘI NGŨ ĐIỀU HÀNH (THE CREW)</h2>
+            <div class="team-grid">
+                
+                <!-- Member 1: Ảnh Hacker trùm mũ -->
+                <div class="team-card">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400" alt="CEO Avatar">
+                    <h3>ZERO_COOL</h3>
+                    <p class="role">Founder / Lead Dev</p>
+                    <p class="desc">Chuyên gia bảo mật mạng. Người kiến tạo hệ thống Harker.</p>
+                </div>
+
+                <!-- Member 2: Ảnh nữ chuyên gia công nghệ -->
+                <div class="team-card">
+                    <img src="https://images.unsplash.com/photo-1614283233556-f35b0c801ef1?w=400" alt="Hardware Specialist">
+                    <h3>ACID_BURN</h3>
+                    <p class="role">Hardware Specialist</p>
+                    <p class="desc">Am hiểu mọi loại phần cứng từ server đến vi mạch nhỏ nhất.</p>
+                </div>
+
+                <!-- Member 3: Ảnh ẩn danh / Mặt nạ -->
+                <div class="team-card">
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400" alt="Support Agent">
+                    <h3>THE_PHANTOM</h3>
+                    <p class="role">Customer Support</p>
+                    <p class="desc">Luôn trực tuyến. Giải quyết vấn đề trước khi bạn nhận ra.</p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2025 Harker Shop. <span style="color: #444;">Data Encrypted.</span>
+    </footer>
+</body>
+</html>

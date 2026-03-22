@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bán hàng Shop - Trang Chủ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>KHO bán hàng</h1>
+        <p style="font-size: 0.9rem; color: #666;">// SERVER STATUS: ONLINE</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="main.html" class="active">Trang Chủ</a></li>
+            <li><a href="about.html">Giới Thiệu</a></li>
+            <li><a href="product.html">Sản Phẩm</a></li>
+            <li><a href="contact.html">Liên Hệ</a></li>
+            <li><a href="login.html">Đăng Xuất</a></li>
+        </ul>
+    </nav>
+
+    <!-- BANNER CHÍNH -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h2 id="typing-text"></h2> <!-- Hiệu ứng gõ chữ sẽ chạy ở đây -->
+            <p>Truy cập kho thiết bị công nghệ cao cấp nhất.</p>
+            <p>Bảo mật tuyệt đối - Giao hàng ẩn danh.</p>
+            <a href="product.html" class="btn-large">[ TRUY CẬP KHO HÀNG ]</a>
+        </div>
+    </section>
+
+    <main>
+        <!-- KHỐI DỊCH VỤ -->
+        <div class="features-grid">
+            <div class="feature-box">
+                <h3>01. BẢO MẬT</h3>
+                <p>Mọi giao dịch được mã hóa đầu cuối. Không lưu vết log.</p>
+            </div>  
+            <div class="feature-box">
+                <h3>02. TỐC ĐỘ</h3>
+                <p>Giao hàng hỏa tốc trong nội thành. Kích hoạt key ngay lập tức.</p>
+            </div>
+            <div class="feature-box">
+                <h3>03. CHẤT LƯỢNG</h3>
+                <p>Phần cứng chính hãng. Phần mềm bản quyền Lifetime.</p>
+            </div>
+        </div>
+
+        <!-- SẢN PHẨM NỔI BẬT -->
+        <h2 class="section-title">// SẢN PHẨM HOT NHẤT</h2>
+        <div class="product-grid" id="featuredGrid">
+            <!-- JS sẽ load 4 sản phẩm vào đây -->
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2025 bán hàng Shop. <span style="color: #444;">System Override Complete.</span>
+    </footer>
+
+    <script>
+        // 1. HIỆU ỨNG GÕ CHỮ (TYPING EFFECT)
+        const textToType = "WELCOME TO bán hàng SYSTEM...";
+        const typeElement = document.getElementById('typing-text');
+        let charIndex = 0;
+
+        function typeWriter() {
+            if (charIndex < textToType.length) {
+                typeElement.innerHTML += textToType.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 100); // Tốc độ gõ
+            }
+        }
+        // Chạy hiệu ứng khi load trang
+        window.onload = typeWriter;
+
+        // 2. HIỂN THỊ SẢN PHẨM NỔI BẬT (Lấy 4 cái ví dụ)
+        const featuredGrid = document.getElementById('featuredGrid');
+        
+        // Tạo dữ liệu giả cho 4 sản phẩm
+        for(let i=1; i<=4; i++) {
+            const div = document.createElement('div');
+            div.className = 'product-item';
+            div.innerHTML = `
+                <div class="img-box">
+                    <img src="https://demoda.vn/wp-content/uploads/2022/05/hinh-anh-may-tinh.jpg" alt="Hot Item">
+                </div>
+                <div class="info-box">
+                    <h3>phụ kiện ${i}</h3>
+                    <p class="price">${(2000000 + i*500000).toLocaleString('vi-VN')}₫</p>
+                    <button onclick="window.location.href='product.html'">[ XEM CHI TIẾT ]</button>
+                </div>
+            `;
+            featuredGrid.appendChild(div);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harker Shop - Danh Sách Sản Phẩm</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>KHO HÀNG ĐIỆN TỬ</h1>
+        <p style="font-size: 0.9rem; color: #666;">// SYSTEM: ONLINE</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="main.html">Trang Chủ</a></li>
+            <li><a href="about.html">Giới Thiệu</a></li>
+            <li><a href="product.html" class="active">Sản Phẩm</a></li>
+            <li><a href="contact.html">Liên Hệ</a></li>
+            <li><a href="login.html">Đăng Xuất</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <h2>// DANH MỤC THIẾT BỊ</h2>
+        
+        <!-- Thanh Tìm Kiếm & Lọc -->
+        <div class="control-panel">
+            <input type="text" id="searchInput" placeholder="> Nhập tên sản phẩm để tìm...">
+            <select id="sortFilter">
+                <option value="default">-- Sắp xếp --</option>
+                <option value="asc">Giá: Thấp đến Cao</option>
+                <option value="desc">Giá: Cao đến Thấp</option>
+            </select>
+        </div>
+
+        <!-- Lưới hiển thị sản phẩm -->
+        <div class="product-grid" id="productGrid">
+            <!-- Javascript sẽ nạp sản phẩm vào đây -->
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2025 Harker Shop. <span style="color: #444;">Encrypted Connection.</span>
+    </footer>
+
+    <!-- JAVASCRIPT XỬ LÝ -->
+    <script>
+        // 1. CẤU HÌNH DANH SÁCH DỮ LIỆU GỐC (TÊN + ẢNH TƯƠNG ỨNG)
+        const sourceData = [
+            { 
+                name: "Bàn phím cơ Cyberpunk", 
+                img: "https://images.unsplash.com/photo-1595225476474-87563907a212?w=500" 
+            },
+            { 
+                name: "Chuột Gaming Silent", 
+                img: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500" 
+            },
+            { 
+                name: "Tai nghe Hacker V2", 
+                img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" 
+            },
+            { 
+                name: "USB Mã Hóa Dữ Liệu", 
+                img: "https://images.unsplash.com/photo-1623282033815-40b05d96c903?w=500" 
+            },
+            { 
+                name: "Laptop Workstation X", 
+                img: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500" 
+            },
+            { 
+                name: "Màn hình 144Hz Cong", 
+                img: "https://api.combatgaming.vn/api/image/file/63ef53bffd2a86352b798e7e"
+            },
+            { 
+                name: "Webcam Chống Theo Dõi", 
+                img: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=500" 
+            },
+            { 
+                name: "Ghế Gaming RGB", 
+                img: "https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=500" 
+            },
+            { 
+                name: "Tản nhiệt nước AIO", 
+                img: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=500" 
+            },
+            { 
+                name: "RAM 32GB Neon", 
+                img: "https://images.unsplash.com/photo-1562976540-1502c2145186?w=500" 
+            },
+            { 
+                name: "SSD NVMe Tốc Độ Cao", 
+                img: "https://tse1.mm.bing.net/th/id/OIP.kRwmL2NxOuhtxkv8dbNNxQHaEc?pid=Api&h=220&P=0" 
+            },
+            { 
+                name: "Bo mạch chủ Z-Series", 
+                img: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=500" 
+            }
+        ];
+
+        let products = [];
+
+        // HÀM TẠO SẢN PHẨM NGẪU NHIÊN
+        for (let i = 1; i <= 24; i++) {
+            // Bước 1: Chọn ngẫu nhiên 1 món trong danh sách sourceData
+            const randomItem = sourceData[Math.floor(Math.random() * sourceData.length)];
+            
+            // Bước 2: Tạo giá ngẫu nhiên
+            const randomPrice = 100000 + Math.floor(Math.random() * 50) * 100000; 
+            
+            // Bước 3: Đẩy vào mảng products
+            // Lưu ý: Lấy tên và ảnh từ randomItem đã chọn
+            products.push({
+                id: i,
+                name: `${randomItem.name} - Ver.${i}`,
+                price: randomPrice,
+                image: randomItem.img 
+            });
+        }
+
+        const grid = document.getElementById('productGrid');
+        const searchInput = document.getElementById('searchInput');
+        const sortFilter = document.getElementById('sortFilter');
+
+        // 2. HÀM HIỂN THỊ SẢN PHẨM RA HTML
+        function renderProducts(list) {
+            grid.innerHTML = ''; // Xóa danh sách cũ
+
+            if(list.length === 0) {
+                grid.innerHTML = '<div class="no-result">> KHÔNG TÌM THẤY DỮ LIỆU TƯƠNG ỨNG.</div>';
+                return;
+            }
+
+            list.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'product-item';
+                
+                // Định dạng tiền tệ Việt Nam
+                const priceStr = item.price.toLocaleString('vi-VN');
+
+                card.innerHTML = `
+                    <div class="img-box">
+                        <img src="${item.image}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
+                    </div>
+                    <div class="info-box">
+                        <h3>${item.name}</h3>
+                        <p class="price">${priceStr}₫</p>
+                        <button onclick="addToCart(${item.id}, '${item.name}')">
+                            [ THÊM VÀO GIỎ ]
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // 3. HÀM XỬ LÝ TÌM KIẾM & SẮP XẾP
+        function handleFilter() {
+            const keyword = searchInput.value.toLowerCase();
+            const sortType = sortFilter.value;
+
+            // Lọc theo tên
+            let filtered = products.filter(p => p.name.toLowerCase().includes(keyword));
+
+            // Sắp xếp giá
+            if(sortType === 'asc') {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (sortType === 'desc') {
+                filtered.sort((a, b) => b.price - a.price);
+            }
+
+            renderProducts(filtered);
+        }
+
+        // 4. HÀM THÊM VÀO GIỎ (Giả lập)
+        function addToCart(id, name) {
+            alert(`>> SYSTEM ALERT:\nĐã thêm module [ ${name} ] vào kho chứa.`);
+        }
+
+        // Lắng nghe sự kiện
+        searchInput.addEventListener('input', handleFilter);
+        sortFilter.addEventListener('change', handleFilter);
+
+        // Chạy lần đầu
+        renderProducts(products);
+    </script>
+</body>
+</html>
